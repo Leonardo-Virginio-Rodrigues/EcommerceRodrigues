@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { User } from '../entities/user.entity';
 import {
   IsEmail,
@@ -9,10 +10,19 @@ import {
 } from 'class-validator';
 
 export class CreateUserDto extends User {
+  @ApiProperty()
+  @IsString()
+  name: string;
 
+  @ApiProperty()
   @IsEmail()
   email: string;
 
+  @ApiProperty()
+  @IsNumber()
+  phone: number;
+
+  @ApiProperty()
   @IsString()
   @MinLength(8, { message: 'Password must be at least 8 characters long.' })
   @MaxLength(20, { message: 'Password must not exceed 20 characters.' })
@@ -21,10 +31,8 @@ export class CreateUserDto extends User {
   })
   password: string;
 
-  @IsString()
-  name: string;
+  
 
-  @IsNumber()
-  phone: number;
+ 
 
 }

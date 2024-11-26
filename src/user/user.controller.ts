@@ -2,13 +2,15 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { IsPublic } from 'src/auth/decorators/is-public.decorator';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('user')
+@ApiTags('users')
+@Controller()
 export class UserController {
   constructor(private readonly userService: UserService) { }
 
   @IsPublic()
-  @Post()
+  @Post('register')
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
