@@ -12,6 +12,7 @@ export class AuthService {
         private readonly userService: UserService,
         private readonly jwtService: JwtService) { }
     
+    
     login(user: User): UserToken{
         //transformar o user em um JWT
         const payload: UserPayload = {

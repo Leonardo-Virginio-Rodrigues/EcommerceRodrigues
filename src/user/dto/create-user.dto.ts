@@ -1,6 +1,7 @@
 import { User } from '../entities/user.entity';
 import {
   IsEmail,
+  IsNumber,
   IsString,
   Matches,
   MaxLength,
@@ -23,7 +24,7 @@ export class CreateUserDto extends User {
   @IsString()
   name: string;
 
-  @IsString()
-  phone: string;
+  @IsNumber()
+  phone: number;
 
 }

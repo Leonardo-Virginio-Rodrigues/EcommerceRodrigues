@@ -1,10 +1,8 @@
-import { IsString, IsUUID, IsEmail } from 'class-validator';
-
 export class User {
   id: string;
   name: string;
   email: string;
-  phone: string;
+  phone: number;
   password: string;
   createdAt: Date;
 }
