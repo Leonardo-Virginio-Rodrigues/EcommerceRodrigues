@@ -11,8 +11,6 @@ export class AuthService {
     constructor(
         private readonly userService: UserService,
         private readonly jwtService: JwtService) { }
-    
-    
     login(user: User): UserToken{
         //transformar o user em um JWT
         const payload: UserPayload = {

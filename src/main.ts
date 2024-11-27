@@ -17,7 +17,9 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Ecommerce API - NestJs')
     .setVersion('1.0')
+    .addBearerAuth()
     .addTag('users')
+    .addTag('products')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document)
