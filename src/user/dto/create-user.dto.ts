@@ -19,8 +19,8 @@ export class CreateUserDto extends User {
   email: string;
 
   @ApiProperty()
-  @IsNumber()
-  phone: number;
+  @IsString()
+  phone: string;
 
   @ApiProperty()
   @IsString()

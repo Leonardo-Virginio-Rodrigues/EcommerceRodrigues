@@ -17,9 +17,12 @@ model User{
   id   String  @id @default(uuid())
   name      String
   email     String   @unique
-  phone     Float   @unique
+  phone     String   @unique
   password  String
   createdAt DateTime @default(now())
+
+  orders    Order[]
+
 }
 
 model Product{
@@ -31,4 +34,35 @@ model Product{
   amountStock Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+
+  itens OrderItem[]
 }
+
+model Order{
+  id String @id @default(uuid())
+  data DateTime @default(now())
+  totalValue Float
+  status String
+  paymentMethod String
+
+  user          User        @relation(fields: [userId], references: [id])
+  userId String
+
+  items OrderItem[]
+}
+
+model OrderItem{
+  id String @id @default(uuid())
+  amount Int
+  unitPrice Float
+
+  order Order @relation(fields: [orderId], references: [id])
+  orderId String
+
+  product Product @relation(fields: [productId], references: [id])
+  productId String
+
+}
+
+

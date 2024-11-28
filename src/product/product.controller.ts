@@ -10,11 +10,19 @@ import { UpdateProductDto } from './dto/update-product.dto';
 export class ProductController {
   constructor(private readonly productService: ProductService) { }
   
+
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Create new product' })
   @Post()
   create(@Body() createProductDto: CreateProductDto){
     return this.productService.create(createProductDto);
+  }
+
+  @IsPublic()
+  @ApiOperation({summary: 'Get a especific product'})
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.productService.findOne(id);
   }
 
   @IsPublic()

@@ -19,6 +19,13 @@ export class ProductService {
     }
   }
 
+  async findOne(id: string) {
+    const Product = this.prisma.product.findUnique({
+      where: { id }
+    });
+
+    return Product;
+  }
 
   async findAll(page: number) {
     try {
