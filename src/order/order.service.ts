@@ -10,34 +10,34 @@ export class OrderService {
 
     const itemsWithPrice = await Promise.all(createOrderDto.itens.map(async (item) => {
       const product = await this.prisma.product.findUnique({
-        where: { id: item.productId }, // Verifica se o produto existe
+        where: { id: item.productId }, 
       });
 
       if (!product) {
         throw new Error(`Produto com ID ${item.productId} não encontrado.`);
       }
 
-      // Passo 2: Retornar o item com o preço do produto
+      
       return {
         productId: item.productId,
         amount: item.amount,
-        unitPrice: product.price,  // Preço do produto, que será preenchido automaticamente
+        unitPrice: product.price, 
       };
     }));
 
-    // Passo 3: Calcular o totalValue (total da ordem)
+  
     const totalValue = itemsWithPrice.reduce((total, item) => total + (item.unitPrice * item.amount), 0);
 
-    // Passo 4: Criar a ordem
+   
     const data = {
       totalValue,
       status: createOrderDto.status,
       paymentMethod: createOrderDto.paymentMethod,
-      userId: UserId,  // Associando o ID do usuário ao pedido
+      userId: UserId,  
       items: {
         create: itemsWithPrice.map((item) => ({
           productId: item.productId,
-          unitPrice: item.unitPrice,  // Preço do produto do banco de dados
+          unitPrice: item.unitPrice, 
           amount: item.amount,
         })),
       },
